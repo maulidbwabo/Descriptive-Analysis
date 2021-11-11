@@ -502,4 +502,22 @@ plot_grid(
   dynamic%>%
     arrange(desc(KS1))%>%
     top_n(20,KS1)
-  
+##Unsupervised Learning Technique(Machine Learning)
+##Exploratory Data Analysis
+  library(ggplot2)
+  library(cowplot)
+  library(viridis)
+  library(viridisLite)
+  library(scales)
+  library(data.table)
+  install.packages("ape")
+  library(ape)
+  library(MASS)
+  library(matrixStats)
+  options(width = 70, digits = 2)
+#Install PCA methods
+  install.packages("BiocManager")
+  library(BiocManager)
+#Split Function
+  d= split(dynamic, dynamic$Date)
+  d 
