@@ -99,19 +99,19 @@ plot_grid(
     geom_violin() +
     geom_boxplot(width = .1) +
     xlab("")
-  #The Tidyverse 
+#The Tidyverse 
   install.packages("tidyverse")
   library(tidyverse)
   install.packages("dplyr")
   library(dplyr)
-  #newdata
+#newdata
   newdata_dy=select(dynamic,Types.of.Firm,Region)
   newdata_dy
-  #Pipe operator
+#Pipe operator
   dynamic %>%select(Types.of.Firm,Region)%>% Filter(Age.of.Respondents<=30)
   class(dynamic)
   str(dynamic)
-  #Descriptive summary
+#Descriptive summary
   s=KS1%>%
     filter(Gender=="Female")%>%
     summarise(average=mean(KS1),standard_deviation=sd(KS1))
@@ -124,7 +124,7 @@ plot_grid(
     filter(Gender == "Female") %>%
     summarize(average = mean(dynamic), standard_deviation = sd(dynamic))
   s
-  ##Descriptive Analysis
+##Descriptive Analysis
   install.packages("readr")
   library(readr)
   install.packages("reshape")
@@ -143,18 +143,18 @@ plot_grid(
   dimnames(dynamic)
   dimnames.data.frame(dynamic)
   sapply(dynamic, class)
-  #Fun function
+#Fun function
   summfn = function(x)c(n=sum(!is.na(x)),mean=mean(x),sd=sd(x))
   
   g=apply(dynamic,2,summfn)
-  #Visualization
+#Visualization
   library(ggplot2)
   ggplot(data = dynamic)
   dynamic%>%ggplot()
   d=dynamic%>% ggplot(aes(KS1/10^6,total,label=abb))
   d
   p <- murders %>% ggplot(aes(population/10^6, total, label = abb))
-  #Day 2 Experience 
+#Day 2 Experience 
   mean(dynamic$Experience)
   mean(dynamic$Experience,na.rm = TRUE)
   mean(dynamic$Age)
@@ -166,71 +166,71 @@ plot_grid(
   x
   index <- heights$sex=="Male"
   x <- heights$height[index]
-  #ggplot(Female) 
+#ggplot(Female) 
   dynamic %>%
     filter(Gender == "Female") %>%
     ggplot(aes(KS1)) +
     geom_histogram(binwidth = 1)
-  #adding color 
+#adding color 
   dynamic %>%
     filter(Gender == "Female") %>%
     ggplot(aes(KS1)) +
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("Male KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Gender == "Female") %>%
     ggplot(aes(KS1)) +
     geom_density()
-  #fill it with the color 
+#fill it with the color 
   dynamic %>%
     filter(Gender == "Female") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Gender=="Female")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
-  #Central Tendency
+#Central Tendency
   dyna=dynamic%>% filter(Gender=="Female")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
-  #Inserting the straight line 
+#Inserting the straight line 
   dynamic %>% filter(Gender=="Female") %>%
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+#
   dynamic%>%
     filter(Gender=="Female")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  #ggplot(Male)
+#ggplot(Male)
   str(dynamic)
   View(dynamic)
   dynamic %>%
     filter(Gender == "Male") %>%
     ggplot(aes(KS1)) +
     geom_histogram(binwidth = 1)
-  #adding color 
+#adding color 
   dynamic %>%
     filter(Gender == "Male") %>%
     ggplot(aes(KS1)) +
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("Male KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Gender == "Male") %>%
     ggplot(aes(KS1)) +
     geom_density()
-  #fill it with the color 
+#fill it with the color 
   dynamic %>%
     filter(Gender == "Male") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Gender=="Male")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
@@ -238,17 +238,17 @@ plot_grid(
   dyna=dynamic%>% filter(Gender=="Male")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
-  #Inserting the straight line 
+#Inserting the straight line 
   dynamic %>% filter(Gender=="Male") %>%
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+#
   dynamic%>%
     filter(Gender=="Male")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  ##The firm size 
+##The firm size 
   dynamic %>%
     filter(Size == "Medium") %>%
     ggplot(aes(KS1)) +
@@ -259,7 +259,7 @@ plot_grid(
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("Size KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Size == "Medium") %>%
     ggplot(aes(KS1)) +
@@ -269,11 +269,11 @@ plot_grid(
     filter(Size == "Medium") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Size=="Medium")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
-  #Central Tendency
+#Central Tendency
   dyna=dynamic%>% filter(Size=="Medium")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
@@ -282,12 +282,12 @@ plot_grid(
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+ #
   dynamic%>%
     filter(Size=="Medium")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  ##large
+##large
   dynamic %>%
     filter(Size == "Large") %>%
     ggplot(aes(KS1)) +
@@ -298,21 +298,21 @@ plot_grid(
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("Size KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Size == "Large") %>%
     ggplot(aes(KS1)) +
     geom_density()
-  #fill it with the color 
+#fill it with the color 
   dynamic %>%
     filter(Size == "Lager") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Size=="Large")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
-  #Central Tendency
+#Central Tendency
   dyna=dynamic%>% filter(Size=="Large")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
@@ -321,25 +321,25 @@ plot_grid(
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+#
   dynamic%>%
     filter(Size=="Large")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  ##QUICK PLOT 
+##QUICK PLOT 
   d = dynamic %>%
     filter(Gender=="Female") %>%
     pull(KS1)
   qplot(d)
-  #qplot through the ggplot
+#qplot through the ggplot
   qplot(sample = scale(x)) + geom_abline()
-  #Q-Plot with the dot operator 
+#Q-Plot with the dot operator 
   dynamic %>% qplot(Gender, KS1, data = .)
-  #The box plot 
+#The box plot 
   dynamic %>% qplot(Gender, KS1, data = ., geom = "boxplot")
   #The plot become the noisy density 
   qplot(d, geom = "density")
-  #Level of Occupancy
+#Level of Occupancy
   dynamic %>%
     filter(Level.of.Occupancy == "Employee") %>%
     ggplot(aes(KS1)) +
@@ -350,35 +350,35 @@ plot_grid(
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Level.of.Occupancy == "Employee") %>%
     ggplot(aes(KS1)) +
     geom_density()
-  #fill it with the color 
+#fill it with the color 
   dynamic %>%
     filter(Level.of.Occupancy == "Employee") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Level.of.Occupancy == "Employee")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
-  #Central Tendency
+#Central Tendency
   dyna=dynamic%>% filter(Level.of.Occupancy == "Employee")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
-  #Inserting the straight line 
+#Inserting the straight line 
   dynamic %>% filter(Level.of.Occupancy == "Employee") %>%
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+#
   dynamic%>%
     filter(Level.of.Occupancy == "Employee")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  ##Managers 
+##Managers 
   dynamic %>%
     filter(Level.of.Occupancy == "Manager") %>%
     ggplot(aes(KS1)) +
@@ -389,63 +389,63 @@ plot_grid(
     geom_histogram(binwidth = 1, fill = "blue", col = "black") +
     xlab("KS1") +
     ggtitle("Histogram")
-  #Density Plot 
+#Density Plot 
   dynamic %>%
     filter(Level.of.Occupancy == "Manager") %>%
     ggplot(aes(KS1)) +
     geom_density()
-  #fill it with the color 
+#fill it with the color 
   dynamic %>%
     filter(Level.of.Occupancy == "Manager") %>%
     ggplot(aes(KS1)) +
     geom_density(fill="blue")
-  #QQ-Plots
+#QQ-Plots
   dynamic%>%filter(Level.of.Occupancy == "Manager")%>%
     ggplot(aes(sample=KS1))+
     geom_qq()
-  #Central Tendency
+#Central Tendency
   dyna=dynamic%>% filter(Level.of.Occupancy == "Manager")%>%
     summarise(mean=mean(KS1),sd=sd(KS1,na.rm = FALSE))
   dyna
-  #Inserting the straight line 
+#Inserting the straight line 
   dynamic %>% filter(Level.of.Occupancy == "Manager") %>%
     ggplot(aes(sample = KS1)) +
     geom_qq(dparams = dyna) +
     geom_abline()
-  #
+#
   dynamic%>%
     filter(Level.of.Occupancy == "Manager")%>%
     ggplot(aes(sample=scale(KS1)))+
     geom_abline()
-  ## Tibble data Set 
+## Tibble data Set 
   dynamic %>% as_tibble()
-  ## Regions analysis
+## Regions analysis
   dynamic %>%
     filter(Gender == "Female" & Region %in% c("Kilimanjaro","Arusha","Tanga")) %>%
     select(Region, Size)
   dynamic %>%
     filter(Size == "Medium" & Region %in% c("Kilimanjaro","Arusha","Tanga")) %>%
     select(Region, Gender,Age)
-  #Scatter Plot 
+#Scatter Plot 
   filter(dynamic, Size == "Medium") %>%
     ggplot(aes(Region, Gender,Age)) +
     geom_point()
-  #
+#
   filter(dynamic, Size == "Medium") %>%
     ggplot( aes( Region, Age, color = Region)) +
     geom_point()
-  #Faceting
+#Faceting
   head(dynamic)
   filter(dynamic, Size %in%c("Small", "Medium", "Large")) %>%
     ggplot(aes( Level.of.Occupancy, Region, col = Region)) +
     geom_point() +
     facet_grid(Region~Size)
-  #Draw in Pair 
+#Draw in Pair 
   filter(dynamic, Size%in%c("Small", "Medium", "Large")) %>%
     ggplot(aes(Level.of.Occupancy, Region, col = Region)) +
     geom_point() +
     facet_grid(. ~ Education.Level)
-  ##Facet Wrap
+##Facet Wrap
   Regions = c("Arusha", "Kilimanjaro", "Tanga")
   Sizes= c("Small","Medium","Large")
   dynamic %>%
@@ -453,52 +453,52 @@ plot_grid(
     ggplot( aes( Gender,Level.of.Occupancy, col = Region)) +
     geom_point() +
     facet_wrap(~Education.Level)
-  #Time Series Plot
+#Time Series Plot
   dynamic %>%
     filter(Region== "Large") %>%
     ggplot(aes(Experience, Level.of.Occupancy)) +
     geom_point()
-  #
+#
   Regions = c("Kilimanjaro","Tanga","Arusha")
   dynamic%>%filter(Region%in% Regions & !is.na(Gender))%>%
     ggplot(aes(Age,KS1,group=Region))+
     geom_line()
-  #Character Manipulations
-  #Converting the character into the factor
+#Character Manipulations
+#Converting the character into the factor
   dynamic%>%
     ggplot(aes(Gender,KS1)) +
     geom_point()
-  #Jitter and alpha blending
+#Jitter and alpha blending
   dynamic%>%
     ggplot(aes(Gender,KS1)) +
     geom_jitter(width = 0.1, alpha = 0.2)
-  #Allign plots
+#Allign plots
   dynamic %>%
     ggplot(aes(KS1, ..density..)) +
     geom_histogram(binwidth = 1, color="black") +
     facet_grid(Gender~.)
-  #
+#
   dynamic %>%
     ggplot(aes(Gender, KS1)) +
     geom_boxplot(coef=3) +
     geom_jitter(width = 0.1, alpha = 0.2) +
     ylab("sex")
-  #
+#
   dynamic %>%
     ggplot(aes(KS1, ..density..)) +
     geom_histogram(binwidth = 1, color="Red") +
     facet_grid(Size~.)
-  ##ROBUST SUMMARIES
+##ROBUST SUMMARIES
   dynamic %>%
     group_by(Gender) %>%
     summarize(average = mean(KS1), sd = sd(KS1),
               median = median(KS1), MAD = mad(KS1))
-  #
+#
   dynamic %>%
     group_by(Size) %>%
     summarize(average = mean(KS1), sd = sd(KS1),
               median = median(KS1), MAD = mad(KS1))
-  #Checking the first ten row
+#Checking the first ten row
   dynamic%>%
     arrange(desc(KS1))%>%
     top_n(20,KS1)
