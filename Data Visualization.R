@@ -112,17 +112,17 @@ plot_grid(
   class(dynamic)
   str(dynamic)
 #Descriptive summary
-  s=KS1%>%
-    filter(Gender=="Female")%>%
-    summarise(average=mean(KS1),standard_deviation=sd(KS1))
-  dynamic$Gender=as.factor(dynamic$Gender)
-  mean(dynamic$Gender)
-  summarise(dynamic,na.rm=TRUE)
-  mean(dynamic$KS1)
-  str(dynamic)
-  s <- dynamic %>%
-    filter(Gender == "Female") %>%
-    summarize(average = mean(dynamic), standard_deviation = sd(dynamic))
+s=KS1%>%
+filter(Gender=="Female")%>%
+summarise(average=mean(KS1),standard_deviation=sd(KS1))
+dynamic$Gender=as.factor(dynamic$Gender)
+mean(dynamic$Gender)
+summarise(dynamic,na.rm=TRUE)
+mean(dynamic$KS1)
+str(dynamic)
+s <- dynamic %>%
+filter(Gender == "Female") %>%
+  summarize(average = mean(dynamic), standard_deviation = sd(dynamic))
   s
 ##Descriptive Analysis
   install.packages("readr")
@@ -521,3 +521,45 @@ plot_grid(
 #Split Function
   d= split(dynamic, dynamic$Date)
   d 
+##Mean Centering for the continuous data(Experience)
+## The following codes for mean centering I have borrowed from Prof.
+## Gaston Sanchez in his blog.(https://www.gastonsanchez.com/visually-enforced/blog/archive/)
+set.seed(212)
+Data = matrix(rnorm(15), 5, 3)
+Data
+### centering with 'scale()'
+center_scale = function(x) {
+    scale(x, scale = FALSE)
+  }
+  
+# apply it
+center_scale(Data)
+# center with 'apply()'
+center_apply <- function(x) {
+apply(x, 2, function(y) y - mean(y))
+  }
+  
+# apply it
+  center_apply(Data)  
+# center with 'colMeans()'
+  center_colmeans <- function(x) {
+    xcenter = colMeans(x)
+    x - rep(xcenter, rep.int(nrow(x), ncol(x)))
+  }
+  
+# apply it
+center_colmeans(Data)  
+#mtcars example 
+install.packages("dplyr")
+#
+#Mean centering 
+library(tidyverse)
+head(dynamic)
+str(dynamic)
+dynamic %>%
+  add_rownames()%>% #if the rownames are needed as a column
+  group_by(Gender) %>% 
+  mutate(cent= Experience-mean(Experience))%>%
+  dplyr ::select(cent)
+  dynamic$Experience[1:100]-mean(dynamic$Experience)
+## This would be usefull for multigroup analysis. 
