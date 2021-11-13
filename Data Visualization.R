@@ -262,7 +262,6 @@ filter(Gender == "Female") %>%
   dynamic%>%ggplot()
   d=dynamic%>% ggplot(aes(KS1/10^6,total,label=abb))
   d
-  p <- murders %>% ggplot(aes(population/10^6, total, label = abb))
 #Day 2 Experience 
   mean(dynamic$Experience)
   mean(dynamic$Experience,na.rm = TRUE)
@@ -602,11 +601,25 @@ filter(Gender == "Female") %>%
     group_by(Gender) %>%
     summarize(average = mean(KS1), sd = sd(KS1),
               median = median(KS1), MAD = mad(KS1))
+dynamic %>%
+    group_by(Gender) %>%
+    summarize(average = mean(KS1), sd = sd(KS1),
+              median = median(KS1), MAD = mad(KS1))
 #
   dynamic %>%
     group_by(Size) %>%
     summarize(average = mean(KS1), sd = sd(KS1),
               median = median(KS1), MAD = mad(KS1))
+  
+dynamic %>%
+    group_by(Education.Level) %>%
+    summarize(average = mean(KS1), sd = sd(KS1),
+              median = median(KS1), MAD = mad(KS1))
+
+dynamic %>%
+  group_by(Maritual.Status) %>%
+  summarize(average = mean(KS1), sd = sd(KS1),
+            median = median(KS1), MAD = mad(KS1))
 #Checking the first ten row
   dynamic%>%
     arrange(desc(KS1))%>%
