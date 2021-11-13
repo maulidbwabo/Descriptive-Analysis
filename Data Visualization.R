@@ -116,6 +116,115 @@ s=KS1%>%
 filter(Gender=="Female")%>%
 summarise(average=mean(KS1),standard_deviation=sd(KS1))
 dynamic$Gender=as.factor(dynamic$Gender)
+dynamic$Level.of.Occupancy=as.factor(dynamic$Level.of.Occupancy)
+dynamic$Education.Level=as.factor(dynamic$Education.Level)
+dynamic$Maritual.Status=as.factor(dynamic$Maritual.Status)
+dynamic$Size=as.factor(dynamic$Size)
+summary(dynamic)
+str(dynamic)
+#qqplot
+install.packages("car")
+install.packages("summarytools")
+library(summarytools)
+library(car)
+##Frequency Distribution 
+freq(dynamic$Gender)
+freq(dynamic$Level.of.Occupancy)
+freq(dynamic$Education.Level)
+freq(dynamic$Size)
+freq(dynamic$Maritual.Status)
+##Cross Tabulation
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Level.of.Occupancy
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Education.Level
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Maritual.Status
+)
+ctable(
+  dynamic$Gender,
+  dynamic$Size
+)
+#Raw-proportions 
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Level.of.Occupancy,
+  prop = "t"
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Education.Level,
+  prop = "t"
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Maritual.Status,
+  prop = "t"
+)
+ctable(
+  dynamic$Gender,
+  dynamic$Size,
+  prop = "t"
+)
+##Test of Independence (Chi-Square)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Level.of.Occupancy,
+  chisq = TRUE,
+  headings = FALSE
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Education.Level,
+  chisq = TRUE,
+  headings = FALSE
+)
+ctable(
+  x=dynamic$Gender,
+  y=dynamic$Maritual.Status,
+  chisq = TRUE,
+  headings = FALSE
+)
+ctable(
+  dynamic$Gender,
+  dynamic$Size,
+  chisq = TRUE,
+  headings = FALSE
+)
+#
+descr(dynamic,
+      headings = FALSE, # remove headings
+      stats = "common" # most common descriptive statistics
+)
+#Dfsummary
+dfSummary(dynamic)
+#Group analysis
+library(psych)
+describeBy(
+  dynamic,
+  dynamic$Gender
+)
+#Aggregate function 
+aggregate(cbind(Gender,Level.of.Occupancy)~Region+Maritual.Status,
+          data= dynamic,
+          mean)
+aggregate(cbind(Gender,Level.of.Occupancy)~Region+Maritual.Status,
+          data= dynamic,
+          median)
+aggregate(cbind(Gender,Level.of.Occupancy)~Region+Maritual.Status,
+          data= dynamic,
+          sd)
+aggregate(cbind(Gender,Level.of.Occupancy)~Region+Maritual.Status,
+          data= dynamic,
+          chisq.test)
+sd(dynamic$Gender)
+#Group Analysis
+qqPlot(dynamic$Experience, groups = dynamic$Size)
 mean(dynamic$Gender)
 summarise(dynamic,na.rm=TRUE)
 mean(dynamic$KS1)
@@ -557,9 +666,9 @@ library(tidyverse)
 head(dynamic)
 str(dynamic)
 dynamic %>%
-  add_rownames()%>% #if the rownames are needed as a column
+  add_rownames()%>% #if the row names are needed as a column
   group_by(Gender) %>% 
   mutate(cent= Experience-mean(Experience))%>%
   dplyr ::select(cent)
   dynamic$Experience[1:100]-mean(dynamic$Experience)
-## This would be usefull for multigroup analysis. 
+## This would be useful for multi-group analysis. 
